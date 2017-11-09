@@ -4,27 +4,9 @@ $(document).ready(function () {
 
     var todos = [];
 
-    var part1Index = "<li data-index='";
-    var part2Checked = "'><input class='checkbox' type='checkbox' ";
-    var part3Title = "/>";
-    var part4End = "<a class='remove'>x</a><hr></li>";
-
-    alert(baseUrl + '/api/todos');
-
     $.get(baseUrl + "/api/todos", {}, function (data) {
         todos = data;
-
-        alert('2');
-
-        $.each(todos, function (index, todo) {
-            var part2;
-            if(todo.completed === true){
-                part2 = "checked='checked'";
-            }else {
-                part2 = "";
-            }
-            $('#list-items').append(part1Index + index + part2 + part3Title + todo.title + part4End);
-        });
+        drawTodos(todos);
     });
 
     $('.add-items').submit(function(event)
@@ -35,14 +17,9 @@ $(document).ready(function () {
 
         if(title && title !== "")
         {
-            newTodo = {title: title, completed: false};
-            $.post(baseUrl + "/api/todos", newTodo, function (data) {
-                todos.append(data);
-
-                var index = todos.length + 1;
-                $('#list-items').append(
-                    part1Index + index + part2Checked + part3Title + data.title + part4End
-                );
+            $.post(baseUrl + "/api/todos", $("#todoForm").serialize(), function (data) {
+                todos.push(data);
+                drawTodos(todos);
                 $('#todo-list-item').val("");
             });
         }
@@ -51,40 +28,84 @@ $(document).ready(function () {
 
     $(document).on('change', '.checkbox', function()
     {
-        var index = $(this).parent().attr('data-index');
-        var completed = !$(this).attr('checked');
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var token = $("meta[name='_csrf']").attr("content");
+
+        var $t = $(this);
+        var index = $t.parent().attr('data-index');
+        var completed = !$t.attr('checked');
+
         var todo = todos[index];
         todo.completed = completed;
+        delete todo.createdAt;
+        delete todo.user;
+
+        console.log(todo);
+
         $.ajax({
             url: baseUrl + "/api/todos/" + todo.id,
             method: "PUT",
             data: todo,
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+            },
             success: function (data) {
+                console.log(data);
                 todos[index] = data;
-
-                if(completed) {
-                    $(this).attr('checked', 'checked');
-                } else {
-                    $(this).removeAttr('checked');
-                }
-
-                $(this).parent().toggleClass('completed');
+                drawTodos(todos);
             }
         });
     });
 
     $(document).on('click', '.remove', function()
     {
+        var header = $("meta[name='_csrf_header']").attr("content");
+        var token = $("meta[name='_csrf']").attr("content");
+
         var index = $(this).parent().attr('data-index');
         $.ajax({
             url: baseUrl + "/api/todos/" + todos[index].id,
             type: "DELETE",
-            success: function (data) {
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader(header, token);
+            },
+            success: function () {
                 todos.splice(index, 1);
-                $(this).parent().remove();
+
+                drawTodos(todos);
             }
         });
 
     });
 
 });
+
+function drawTodos(data) {
+    var part1Completed = "<li ";
+    var part2Index = " data-index='";
+    var part3Checked = "'><input class='checkbox' type='checkbox' ";
+    var part4Title = "/>";
+    var part5End = "<a class='remove'>x</a><hr></li>";
+
+    $('#list-items').html("");
+
+    $.each(data, function (index, todo) {
+        var part1;
+        var part2 = index;
+        var part3;
+        var part4 = todo.title;
+        if(todo.completed === true){
+            part1 = "class='completed'";
+            part3 = "checked='checked'";
+        }else {
+            part1 = "";
+            part3 = "";
+        }
+        var html = part1Completed + part1
+            + part2Index + part2
+            + part3Checked + part3
+            + part4Title + part4
+            + part5End;
+        $('#list-items').append(html);
+    });
+}

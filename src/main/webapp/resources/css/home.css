@@ -15,6 +15,10 @@ form {
     border: 3px solid #3b3b3b;
 }
 
+#logoutForm{
+    border: none;
+}
+
 input[type="text"] {
     outline: 0;
     width: 55%;
@@ -23,6 +27,18 @@ input[type="text"] {
     font-size: 18px;
     font-weight: normal;
     padding-left: 10px;
+}
+
+.logout {
+    outline: 0;
+    float: right;
+    width: 34%;
+    height: 36px;
+    color: #fff;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    background-color: #1c315e;
 }
 
 .add {
