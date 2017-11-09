@@ -19,6 +19,7 @@
     <link href='${contextPath}/resources/css/fonts.google.css' rel='stylesheet' type='text/css'>
     <!-- CSS -->
     <script src="${contextPath}/resources/js/jquery.min.js"></script>
+    <script >var baseUrl = "${contextPath}" </script>
     <script src="${contextPath}/resources/js/home.js" type="application/javascript"></script>
     <link href="${contextPath}/resources/css/home.css" rel="stylesheet">
     <style>

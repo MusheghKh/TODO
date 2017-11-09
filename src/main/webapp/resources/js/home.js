@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    var baseUrl = "http://localhost:8080";
-
     var todos = [];
 
     $.get(baseUrl + "/api/todos", {}, function (data) {
