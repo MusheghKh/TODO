@@ -1,19 +1,19 @@
-# Registration and Login Example with Spring Security, Spring Boot, Spring Data JPA, HSQL, JSP
+# Fantastic TODO Application
 
 ## Guide
-https://hellokoding.com/registration-and-login-example-with-spring-security-spring-boot-spring-data-jpa-hsql-jsp/
+NO GUIDE
 
 ## Prerequisites
-- JDK 1.7 or later
+- JDK 1.8
 - Maven 3 or later
 
 ## Stack
 - Spring Security
 - Spring Boot
-- Spring Data JPA
+- Spring Data
 - Maven
 - JSP
-- HSQL
+- MongoDB
 
 ## Run
 ```mvn clean spring-boot:run```
