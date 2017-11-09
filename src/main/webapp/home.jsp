@@ -15,10 +15,10 @@
 
     <title>Minimal To-do List And Task Manager App</title>
 
-    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <link href="${contextPath}/resources/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <link href='${contextPath}/resources/css/fonts.google.css' rel='stylesheet' type='text/css'>
     <!-- CSS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="${contextPath}/resources/js/jquery.min.js"></script>
     <script src="${contextPath}/resources/js/home.js" type="application/javascript"></script>
     <link href="${contextPath}/resources/css/home.css" rel="stylesheet">
     <style>
