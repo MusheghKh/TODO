@@ -1,4 +1,4 @@
-package com.max.fantastictodo.service;
+package com.max.fantastictodo.service.impl;
 
 import com.max.fantastictodo.model.Role;
 import com.max.fantastictodo.model.User;

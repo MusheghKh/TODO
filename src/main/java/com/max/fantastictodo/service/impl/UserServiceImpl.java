@@ -1,18 +1,17 @@
-package com.max.fantastictodo.service;
+package com.max.fantastictodo.service.impl;
 
 import com.max.fantastictodo.Constants;
 import com.max.fantastictodo.model.Role;
-import com.max.fantastictodo.model.Todo;
 import com.max.fantastictodo.model.User;
 import com.max.fantastictodo.repository.RoleRepository;
 import com.max.fantastictodo.repository.UserRepository;
+import com.max.fantastictodo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {

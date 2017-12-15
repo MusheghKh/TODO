@@ -1,9 +1,11 @@
-package com.max.fantastictodo.service;
+package com.max.fantastictodo.service.impl;
 
 import com.max.fantastictodo.model.Todo;
 import com.max.fantastictodo.model.User;
 import com.max.fantastictodo.repository.TodoRepository;
 import com.max.fantastictodo.repository.UserRepository;
+import com.max.fantastictodo.service.SecurityService;
+import com.max.fantastictodo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TodoServiceImpl implements TodoService{
+public class TodoServiceImpl implements TodoService {
 
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
